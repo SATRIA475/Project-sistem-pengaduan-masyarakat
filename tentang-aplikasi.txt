@@ -1,0 +1,39 @@
+=============================================================
+TENTANG APLIKASI - LAPORPAK (SISTEM PENGADUAN MASYARAKAT)
+=============================================================
+
+1. DESKRIPSI UMUM
+LaporPak adalah sebuah platform digital layanan masyarakat berbasis Web dan Mobile (Android/iOS) yang bertujuan untuk menjembatani komunikasi antara warga dengan instansi/pemerintah terkait. Aplikasi ini memungkinkan masyarakat untuk melaporkan keluhan, masalah infrastruktur (jalan rusak, lampu mati, dll.), hingga insiden sosial di sekitar mereka secara real-time yang dilengkapi dengan bukti foto dan titik lokasi (GPS).
+
+2. TEKNOLOGI YANG DIGUNAKAN (TECH STACK)
+- Backend API  : Node.js, Express.js (RESTful API), JSON Web Token (JWT) untuk keamanan/autentikasi.
+- Database     : MySQL (Relational Database)
+- Web Frontend : Next.js (React Framework), Tailwind CSS (Styling), Leaflet.js (Pemetaan/Maps)
+- Mobile App   : React Native (Expo)
+
+3. SKALA APLIKASI
+Aplikasi LaporPak memiliki arsitektur yang dirancang untuk SKALA MENENGAH (Medium-Scale). 
+Sangat cocok dan ideal untuk diterapkan pada:
+- Pemerintahan tingkat Kabupaten / Kota (Pemkab / Pemkot).
+- Sistem pelaporan Kelurahan / Kecamatan cerdas (Smart Village / Smart City skala kecil).
+- Manajemen Kawasan Terpadu (Kampus besar, Perumahan Mandiri, atau Kawasan Industri).
+(Alasan: Penggunaan arsitektur monolitik Express + MySQL di backend sangat solid dan mudah dikelola untuk menangani ribuan laporan harian tanpa memerlukan infrastruktur serverless/microservices yang rumit dan mahal di awal).
+
+4. FITUR UTAMA
+a. Warga (Aplikasi Mobile & Web)
+   - Autentikasi (Register, Login, Edit Profil).
+   - Pembuatan laporan dengan input teks, unggah gambar/foto, dan *pinpoint* lokasi peta (Google Maps/OpenStreetMap).
+   - Lacak status laporan secara transparan (Pending -> Proses -> Selesai / Ditolak).
+   - Fitur Sosial: Melihat laporan publik, memberi "Like", dan "Komentar" pada laporan warga lain.
+   - Live Chat dengan Admin (Customer Service).
+   - Laporkan (Report) keluhan spam.
+
+b. Admin (Web Dashboard)
+   - Dashboard analitik (Statistik jumlah laporan dan statusnya).
+   - Pemetaan (Map Overview) untuk melihat area sebaran laporan terbanyak.
+   - Manajemen Status Laporan (Verifikasi, menolak laporan yang tidak valid, memproses, hingga menyelesaikan laporan).
+   - Membalas Live Chat dari warga.
+   
+c. Super Admin (Web Dashboard)
+   - Semua fitur milik Admin.
+   - Manajemen Pengguna (CRUD Data User, Menambahkan Admin baru, dan Menghapus hak akses Admin).

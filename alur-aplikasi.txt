@@ -1,0 +1,38 @@
+=============================================================
+ALUR KERJA APLIKASI - LAPORPAK (SISTEM PENGADUAN MASYARAKAT)
+=============================================================
+
+Berikut adalah alur jalan aplikasi (Business Logic) dari mulai pengguna mendaftar hingga laporan selesai ditangani:
+
+1. ALUR REGISTRASI & AUTENTIKASI
+   a. Pengguna (Warga) mengunduh aplikasi Mobile atau membuka Website LaporPak.
+   b. Warga mendaftarkan akun baru dengan mengisi Nama, Email, dan Password.
+   c. Warga melakukan Login ke dalam sistem. Sistem akan memberikan sesi akses (JWT Token) ke perangkat pengguna.
+
+2. ALUR PELAPORAN KELUHAN (WARGA)
+   a. Setelah Login, warga masuk ke halaman "Buat Laporan".
+   b. Warga melengkapi detail formulir:
+      - Judul keluhan.
+      - Deskripsi masalah secara detail.
+      - Melampirkan bukti berupa Foto dari lokasi kejadian.
+      - Menandai titik lokasi kejadian pada Peta Interaktif (Maps).
+   c. Warga mengirimkan laporan. Laporan masuk ke dalam sistem dengan status awal "PENDING" (Menunggu).
+
+3. ALUR VERIFIKASI & PENANGANAN (ADMIN/INSTANSI)
+   a. Admin login ke Web Dashboard.
+   b. Pada halaman utama, Admin dapat melihat peta sebaran keluhan dan daftar laporan yang baru masuk (berstatus Pending).
+   c. Admin memeriksa detail laporan warga (mengecek teks, foto, dan lokasi peta).
+   d. Admin melakukan aksi terhadap laporan:
+      - Jika Laporan Palsu/Spam: Admin menekan tombol "Tolak Laporan". Status berubah menjadi "DITOLAK".
+      - Jika Laporan Valid: Admin menekan "Proses Laporan". Status berubah menjadi "PROSES" (Menandakan petugas di lapangan sedang bekerja).
+   e. Setelah masalah di lapangan berhasil diperbaiki, Admin memperbarui status laporan menjadi "SELESAI".
+
+4. ALUR INTERAKSI SOSIAL & KOMUNIKASI
+   a. Laporan Warga yang masuk ke daftar publik dapat dilihat oleh warga lainnya di timeline.
+   b. Warga lain dapat menekan tombol "Suka" (Like) dan menulis "Komentar" untuk saling berdiskusi.
+   c. Jika warga pelapor membutuhkan informasi tambahan, warga bisa menggunakan fitur "Live Chat" untuk mengirim pesan langsung kepada Admin yang sedang bertugas.
+
+5. ALUR MANAJEMEN ADMIN (SUPER ADMIN)
+   a. Super Admin bertugas mengawasi jalannya sistem secara keseluruhan.
+   b. Melalui Web Dashboard, Super Admin dapat memantau data seluruh pengguna.
+   c. Super Admin memiliki hak istimewa untuk mendaftarkan akun Admin baru untuk operator, serta memberhentikan/menghapus akun Admin jika terjadi penyalahgunaan.

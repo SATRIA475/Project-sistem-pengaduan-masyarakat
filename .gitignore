@@ -1,0 +1,24 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+
+# Build
+dist/
+build/
+
+# Other
+backend/uploads/
+mobile/.expo/
+mobile/node_modules/
+web/node_modules/
+web/.next/
