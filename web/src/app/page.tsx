@@ -526,7 +526,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {publicComplaints.length > 0 ? publicComplaints.map((c: any) => {
                   const images = c.image ? c.image.split(',') : [];
-                  const thumb = images.length > 0 ? `http://localhost:5000${images[0]}` : null;
+                  const thumb = images.length > 0 ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${images[0]}` : null;
                   return (
                     <div key={c.id} className="bg-white border border-[#EAECE4]/30 rounded-2xl p-5 shadow-sm space-y-4 hover:shadow-md transition-shadow">
                       <div className="flex justify-between items-start">
@@ -548,7 +548,7 @@ export default function Home() {
                       <div className="flex items-center gap-2 pt-2 border-t border-[#EAECE4]/20">
                         <div className="w-6 h-6 rounded-full bg-[#EAECE4] text-[#355872] flex items-center justify-center text-[10px] font-bold overflow-hidden">
                           {c.user_profile_image ? (
-                            <img src={`http://localhost:5000${c.user_profile_image}`} alt={c.user_name} className="w-full h-full object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${c.user_profile_image}`} alt={c.user_name} className="w-full h-full object-cover" />
                           ) : (
                             c.user_name?.[0]?.toUpperCase() || 'W'
                           )}

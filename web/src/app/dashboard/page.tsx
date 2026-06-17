@@ -59,9 +59,9 @@ export default function Dashboard() {
   const [isMapPickerOpen, setIsMapPickerOpen] = useState(false);
   const [showNotifDropdown, setShowNotifDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // Laporan Saya Tab States
-  const [laporanSayaStatusFilter, setLaporanSayaStatusFilter] = useState<'Semua' | 'Menunggu' | 'Proses' | 'Selesai'>('Semua');
+  const [laporanSayaStatusFilter, setLaporanSayaStatusFilter] = useState<'Semua' | 'Menunggu' | 'Proses' | 'Selesai' | 'Ditolak'>('Semua');
   const [laporanSayaSearchQuery, setLaporanSayaSearchQuery] = useState('');
 
   // Reverse Geocoded Address
@@ -473,7 +473,7 @@ export default function Dashboard() {
         id: `comment-${com.id}`,
         sender: com.user_name,
         role: 'Warga Terverifikasi',
-        avatar: com.user_profile_image ? `http://localhost:5000${com.user_profile_image}` : null,
+        avatar: com.user_profile_image ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${com.user_profile_image}` : null,
         letter: com.user_name?.[0]?.toUpperCase() || 'U',
         message: com.comment,
         created_at: com.created_at,
@@ -483,7 +483,7 @@ export default function Dashboard() {
         id: `response-${resp.id}`,
         sender: resp.admin_name || 'Dinas Pertamanan',
         role: 'TANGGAPAN RESMI',
-        avatar: resp.admin_profile_image ? `http://localhost:5000${resp.admin_profile_image}` : null,
+        avatar: resp.admin_profile_image ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${resp.admin_profile_image}` : null,
         letter: resp.admin_name?.[0]?.toUpperCase() || 'A',
         message: resp.message,
         created_at: resp.created_at,
@@ -543,7 +543,7 @@ export default function Dashboard() {
                           <div className="flex gap-3">
                             <div className="w-8 h-8 rounded-full bg-[#EAECE4] flex-shrink-0 flex items-center justify-center text-[#355872] font-bold text-xs overflow-hidden">
                               {n.admin_profile_image ? (
-                                <img src={`http://localhost:5000${n.admin_profile_image}`} alt={n.admin_name} className="w-full h-full object-cover" />
+                                <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${n.admin_profile_image}`} alt={n.admin_name} className="w-full h-full object-cover" />
                               ) : (
                                 n.admin_name?.[0]?.toUpperCase() || 'A'
                               )}
@@ -572,7 +572,7 @@ export default function Dashboard() {
           >
             <div className="w-8 h-8 rounded-full border border-[#EAECE4] flex items-center justify-center bg-[#EAECE4] overflow-hidden text-[#355872] font-bold text-xs">
               {user?.profile_image ? (
-                <img src={`http://localhost:5000${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
+                <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
               ) : (
                 user?.name?.[0]?.toUpperCase() || 'U'
               )}
@@ -676,14 +676,14 @@ export default function Dashboard() {
                   <span className="text-gray-400 font-medium">Laporan #RP-2026-{selectedComplaint.id.toString().padStart(3, '0')}</span>
                 </button>
                 <div className="flex items-center gap-3">
-                  <button 
+                  <button
                     onClick={() => handleShare(selectedComplaint.id)}
                     className="p-2 hover:bg-gray-100 rounded-full text-gray-550 transition-colors" title="Bagikan"
                   >
                     <Share2 size={18} />
                   </button>
                   <div className="relative">
-                    <button 
+                    <button
                       onClick={() => setShowMoreDropdown(!showMoreDropdown)}
                       className="p-2 hover:bg-gray-100 rounded-full text-gray-550 transition-colors" title="Pilihan Lainnya"
                     >
@@ -691,7 +691,7 @@ export default function Dashboard() {
                     </button>
                     {showMoreDropdown && (
                       <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-lg z-20 overflow-hidden">
-                        <button 
+                        <button
                           onClick={() => handleReportContent(selectedComplaint.id)}
                           className="w-full text-left px-4 py-2.5 text-sm font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 transition-colors"
                         >
@@ -726,7 +726,7 @@ export default function Dashboard() {
                     <div className="flex items-center gap-3 pt-2 border-t border-gray-50">
                       <div className="w-10 h-10 rounded-full bg-[#EAECE4] flex items-center justify-center text-[#355872] font-extrabold text-sm shadow-inner overflow-hidden flex-shrink-0">
                         {selectedComplaint.user_profile_image ? (
-                          <img src={`http://localhost:5000${selectedComplaint.user_profile_image}`} alt={selectedComplaint.user_name} className="w-full h-full object-cover" />
+                          <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${selectedComplaint.user_profile_image}`} alt={selectedComplaint.user_name} className="w-full h-full object-cover" />
                         ) : (
                           selectedComplaint.user_name?.[0]?.toUpperCase() || 'U'
                         )}
@@ -748,7 +748,7 @@ export default function Dashboard() {
                           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray-100 bg-[#FAFBF7] flex items-center justify-center relative">
                             {activeImage ? (
                               <img
-                                src={`http://localhost:5000${activeImage}`}
+                                src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${activeImage}`}
                                 alt="Evidence Image"
                                 className="w-full h-full object-cover"
                               />
@@ -769,7 +769,7 @@ export default function Dashboard() {
                                   onClick={() => setActivePhotoIndex(idx)}
                                   className={`aspect-video w-24 rounded-xl overflow-hidden cursor-pointer transition-all border-2 ${activePhotoIndex === idx ? 'border-[#355872] scale-105 shadow-sm' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                 >
-                                  <img src={`http://localhost:5000${imgUrl}`} className="w-full h-full object-cover" />
+                                  <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${imgUrl}`} className="w-full h-full object-cover" />
                                 </div>
                               ))}
                             </div>
@@ -850,7 +850,7 @@ export default function Dashboard() {
                       <div className="flex items-start gap-3">
                         <div className="w-8 h-8 rounded-full bg-[#EAECE4] flex items-center justify-center text-[#355872] font-bold text-xs overflow-hidden flex-shrink-0">
                           {user?.profile_image ? (
-                            <img src={`http://localhost:5000${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
                           ) : (
                             user?.name?.[0]?.toUpperCase() || 'U'
                           )}
@@ -1245,7 +1245,7 @@ export default function Dashboard() {
                                 <div className="flex gap-3">
                                   <div className="w-8 h-8 rounded-full bg-[#EAECE4] flex-shrink-0 flex items-center justify-center text-[#355872] font-bold text-xs overflow-hidden">
                                     {n.admin_profile_image ? (
-                                      <img src={`http://localhost:5000${n.admin_profile_image}`} alt={n.admin_name} className="w-full h-full object-cover" />
+                                      <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${n.admin_profile_image}`} alt={n.admin_name} className="w-full h-full object-cover" />
                                     ) : (
                                       n.admin_name?.[0]?.toUpperCase() || 'A'
                                     )}
@@ -1321,7 +1321,7 @@ export default function Dashboard() {
                           <div className="flex items-center gap-3">
                             <div className="w-11 h-11 rounded-full bg-[#EAECE4] flex items-center justify-center font-bold text-sm overflow-hidden flex-shrink-0 shadow-inner">
                               {c.user_profile_image ? (
-                                <img src={`http://localhost:5000${c.user_profile_image}`} alt={c.user_name} className="w-full h-full object-cover" />
+                                <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${c.user_profile_image}`} alt={c.user_name} className="w-full h-full object-cover" />
                               ) : (
                                 c.user_name?.[0]?.toUpperCase() || 'U'
                               )}
@@ -1351,7 +1351,7 @@ export default function Dashboard() {
                         {mainImage ? (
                           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray-100 bg-[#FAFBF7] flex items-center justify-center relative">
                             <img
-                              src={`http://localhost:5000${mainImage}`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${mainImage}`}
                               alt="Evidence Image"
                               className="w-full h-full object-cover"
                             />
@@ -1458,13 +1458,13 @@ export default function Dashboard() {
               {/* List */}
               {(() => {
                 let filtered = complaints.filter((c: any) => c.user_id === user?.id);
-                if (laporanSayaStatusFilter === 'Menunggu') filtered = filtered.filter((c:any) => c.status === 'pending');
-                if (laporanSayaStatusFilter === 'Proses') filtered = filtered.filter((c:any) => c.status === 'process');
-                if (laporanSayaStatusFilter === 'Selesai') filtered = filtered.filter((c:any) => c.status === 'done' || c.status === 'approved');
-                if (laporanSayaStatusFilter === 'Ditolak') filtered = filtered.filter((c:any) => c.status === 'rejected');
+                if (laporanSayaStatusFilter === 'Menunggu') filtered = filtered.filter((c: any) => c.status === 'pending');
+                if (laporanSayaStatusFilter === 'Proses') filtered = filtered.filter((c: any) => c.status === 'process');
+                if (laporanSayaStatusFilter === 'Selesai') filtered = filtered.filter((c: any) => c.status === 'done' || c.status === 'approved');
+                if (laporanSayaStatusFilter === 'Ditolak') filtered = filtered.filter((c: any) => c.status === 'rejected');
 
                 if (laporanSayaSearchQuery) {
-                  filtered = filtered.filter((c:any) => c.title.toLowerCase().includes(laporanSayaSearchQuery.toLowerCase()));
+                  filtered = filtered.filter((c: any) => c.title.toLowerCase().includes(laporanSayaSearchQuery.toLowerCase()));
                 }
 
                 if (filtered.length === 0) {
@@ -1479,7 +1479,7 @@ export default function Dashboard() {
                   <div className="space-y-4">
                     {filtered.map((c: any) => (
                       <div key={c.id} className="bg-white rounded-[32px] border border-gray-100 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row justify-between items-stretch gap-6 hover:shadow-md transition-shadow">
-                        
+
                         <div className="flex-1 space-y-4">
                           <div className="flex items-center gap-3">
                             <span className={`px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase flex items-center gap-1.5 ${c.status === 'pending' ? 'bg-[#FFFbeb] text-[#D97706]' : c.status === 'process' ? 'bg-[#EFF6FF] text-[#2563EB]' : c.status === 'rejected' ? 'bg-[#FEF2F2] text-[#DC2626]' : 'bg-[#ECFDF5] text-[#059669]'}`}>
@@ -1487,7 +1487,7 @@ export default function Dashboard() {
                               {c.status === 'pending' ? 'MENUNGGU' : c.status === 'process' ? 'PROSES' : c.status === 'rejected' ? 'DITOLAK' : 'SELESAI'}
                             </span>
                             <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5">
-                              <span className="text-gray-300">📅</span> {new Date(c.created_at).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase()}
+                              <span className="text-gray-300">📅</span> {new Date(c.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase()}
                             </span>
                           </div>
 
@@ -1531,7 +1531,7 @@ export default function Dashboard() {
                   <div className="flex-shrink-0 mb-6 md:mb-0">
                     <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#EAECE4] to-[#355872] border-[6px] border-[#FAFBF7] shadow-md flex items-center justify-center text-white font-extrabold text-4xl relative overflow-hidden">
                       {user?.profile_image ? (
-                        <img src={`http://localhost:5000${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
+                        <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${user.profile_image}`} alt={user.name} className="w-full h-full object-cover" />
                       ) : (
                         user?.name?.[0]?.toUpperCase() || 'U'
                       )}
@@ -1616,7 +1616,7 @@ export default function Dashboard() {
 
                         <div className="w-full h-24 bg-gray-50 rounded-xl overflow-hidden mb-3 border border-gray-100 flex items-center justify-center">
                           {c.image ? (
-                            <img src={`http://localhost:5000${c.image}`} className="w-full h-full object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${c.image}`} className="w-full h-full object-cover" />
                           ) : (
                             <ImageIcon className="w-8 h-8 text-gray-200 stroke-[1.2]" />
                           )}
@@ -1656,7 +1656,7 @@ export default function Dashboard() {
 
                           <div className="w-full h-24 bg-gray-50 rounded-xl overflow-hidden mb-3 border border-gray-100 flex items-center justify-center">
                             {c.image ? (
-                              <img src={`http://localhost:5000${c.image}`} className="w-full h-full object-cover" />
+                              <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${c.image}`} className="w-full h-full object-cover" />
                             ) : (
                               <ImageIcon className="w-8 h-8 text-gray-200 stroke-[1.2]" />
                             )}
@@ -1709,7 +1709,7 @@ export default function Dashboard() {
                           {profilePreview ? (
                             <img src={profilePreview} alt="Preview" className="w-full h-full object-cover" />
                           ) : user?.profile_image ? (
-                            <img src={`http://localhost:5000${user.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${user.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                           ) : (
                             <span className="text-3xl font-bold text-[#355872]">{user?.name?.[0]?.toUpperCase() || 'U'}</span>
                           )}

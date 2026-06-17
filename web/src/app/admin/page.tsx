@@ -676,7 +676,7 @@ export default function AdminDashboard() {
         <div className="p-4 bg-[#EBF0E8] flex items-center gap-3 border-t border-[#F7F8F0]">
           <div className="w-8 h-8 rounded-full bg-[#355872] text-white flex items-center justify-center text-xs font-bold shadow-sm overflow-hidden flex-shrink-0 animate-none">
             {currentUser?.profile_image && currentUser?.role !== 'super_admin' ? (
-              <img src={`http://localhost:5000${currentUser.profile_image}`} alt={currentUser.name} className="w-full h-full object-cover" />
+              <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${currentUser.profile_image}`} alt={currentUser.name} className="w-full h-full object-cover" />
             ) : (
               currentUser?.name?.[0]?.toUpperCase() || 'A'
             )}
@@ -961,7 +961,7 @@ export default function AdminDashboard() {
                         <div className="flex items-center gap-3 pt-4 border-t border-[#FDFEFC]">
                           <div className="w-10 h-10 rounded-full bg-[#F7F8F0] flex items-center justify-center text-[#355872] font-bold text-sm shadow-inner overflow-hidden flex-shrink-0">
                             {selectedComplaint.user_profile_image ? (
-                              <img src={`http://localhost:5000${selectedComplaint.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                              <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${selectedComplaint.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                             ) : (
                               selectedComplaint.user_name?.[0]?.toUpperCase() || 'U'
                             )}
@@ -984,7 +984,7 @@ export default function AdminDashboard() {
                               <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray-100 bg-[#FAFBFA] flex items-center justify-center relative">
                                 {activeImage ? (
                                   <img 
-                                    src={`http://localhost:5000${activeImage}`} 
+                                    src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${activeImage}`} 
                                     alt="Evidence Image" 
                                     className="w-full h-full object-cover"
                                   />
@@ -1005,7 +1005,7 @@ export default function AdminDashboard() {
                                       onClick={() => setActivePhotoIndex(idx)}
                                       className={`aspect-video w-24 rounded-xl overflow-hidden cursor-pointer transition-all border-2 ${activePhotoIndex === idx ? 'border-[#355872] scale-105 shadow-sm' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                     >
-                                      <img src={`http://localhost:5000${imgUrl}`} className="w-full h-full object-cover" />
+                                      <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${imgUrl}`} className="w-full h-full object-cover" />
                                     </div>
                                   ))}
                                 </div>
@@ -1079,7 +1079,7 @@ export default function AdminDashboard() {
                                     <div className="flex items-center gap-2">
                                       <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shadow-inner overflow-hidden flex-shrink-0 ${item.is_official ? 'bg-red-100 text-red-650' : 'bg-[#F7F8F0] text-[#355872]'}`}>
                                         {item.profile_image ? (
-                                          <img src={`http://localhost:5000${item.profile_image}`} alt="Avatar" className="w-full h-full object-cover" />
+                                          <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${item.profile_image}`} alt="Avatar" className="w-full h-full object-cover" />
                                         ) : (
                                           item.avatar
                                         )}
@@ -1255,7 +1255,7 @@ export default function AdminDashboard() {
                                   <div className="flex items-center gap-2">
                                     <div className="w-7 h-7 rounded-full bg-[#F7F8F0] flex items-center justify-center text-[10px] font-bold text-[#355872] overflow-hidden flex-shrink-0">
                                       {c.user_profile_image ? (
-                                        <img src={`http://localhost:5000${c.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                                        <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${c.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                                       ) : (
                                         c.user_name?.[0]?.toUpperCase() || 'U'
                                       )}
@@ -1415,7 +1415,7 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-3">
                             <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold shadow-sm overflow-hidden flex-shrink-0 ${u.role === 'super_admin' ? 'bg-[#FFF2F0] text-red-650' : u.role === 'admin' ? 'bg-[#F0F6FF] text-blue-600' : 'bg-gray-100 text-gray-600'}`}>
                               {u.profile_image && u.role !== 'super_admin' && u.role !== 'admin' ? (
-                                <img src={`http://localhost:5000${u.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                                <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${u.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                               ) : (
                                 u.name?.[0]?.toUpperCase() || 'U'
                               )}
@@ -1502,7 +1502,7 @@ export default function AdminDashboard() {
                             isSelected ? 'bg-[#355872] text-white' : 'bg-gray-200 text-gray-700'
                           }`}>
                             {room.user_profile_image ? (
-                              <img src={`http://localhost:5000${room.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                              <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${room.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                             ) : (
                               room.user_name?.[0]?.toUpperCase() || 'W'
                             )}
@@ -1543,7 +1543,7 @@ export default function AdminDashboard() {
                           return (
                             <div className="w-10 h-10 rounded-full bg-[#9CD5FF] flex items-center justify-center text-[#355872] font-bold text-sm shadow-sm overflow-hidden flex-shrink-0 animate-none">
                               {activeRoom?.user_profile_image ? (
-                                <img src={`http://localhost:5000${activeRoom.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                                <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${activeRoom.user_profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                               ) : (
                                 activeRoom?.user_name?.[0]?.toUpperCase() || 'W'
                               )}
@@ -1645,7 +1645,7 @@ export default function AdminDashboard() {
                           {profilePreview ? (
                             <img src={profilePreview} alt="Preview" className="w-full h-full object-cover" />
                           ) : currentUser?.profile_image ? (
-                            <img src={`http://localhost:5000${currentUser.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${currentUser.profile_image}`} alt="Profile" className="w-full h-full object-cover" />
                           ) : (
                             <span className="text-3xl font-bold text-[#355872]">{currentUser?.name?.[0]?.toUpperCase() || 'A'}</span>
                           )}
